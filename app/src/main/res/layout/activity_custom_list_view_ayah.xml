@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".customListViewAyah"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/AyahEng"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="ArabicText"
+        android:textSize="25dp"
+        android:fontFamily="@font/noorehuda"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/AyahUrdu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UrduText"
+        android:textSize="20dp"
+        android:fontFamily="@font/jameelnoorinastaleeqregular"
+        android:gravity="right"
+        tools:ignore="HardcodedText" />
+
+</LinearLayout>
