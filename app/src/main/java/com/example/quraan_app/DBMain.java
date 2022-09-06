@@ -28,6 +28,7 @@ public class DBMain extends SQLiteOpenHelper {
     public ArrayList<String> AyahsUrdu = new ArrayList<>();
     public ArrayList<String> FirstSearch = new ArrayList<>();
     public ArrayList<String> SecondSearch = new ArrayList<>();
+    public Cursor a;
 
     public DBMain(Context context) {
         super(context,  DB_NAME , null, 3);
@@ -87,7 +88,6 @@ public class DBMain extends SQLiteOpenHelper {
         if(checkDB != null) {
             checkDB.close();
         }
-
     }
 
     public void DBAyahs(int index1){
@@ -134,7 +134,7 @@ public class DBMain extends SQLiteOpenHelper {
 
     }
 
-    public void DBSearch(String searchTxt1)
+    public Cursor DBSearch(String searchTxt1, boolean Ayah)
     {
         SQLiteDatabase checkDB = null;
         try{
@@ -142,19 +142,36 @@ public class DBMain extends SQLiteOpenHelper {
             String path = DB_PATH + DB_NAME;
             Log.i("myPath ......",path);
             checkDB = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
-
             Log.i("myPath ......",path);
-            if (checkDB!=null)
-            {
-                Cursor c = checkDB.rawQuery("select * from tsurah where SurahNameE LIKE '%"+searchTxt1+"%'  OR SurahNameU LIKE '%"+searchTxt1+"%' ",null);
-                if (c.moveToFirst()) {
-                    do {
-                        if(c.getString(0)!=null) {
+            if(Ayah==false) {
+                if (checkDB != null) {
+                    Cursor c = checkDB.rawQuery("select * from tsurah where SurahNameE LIKE '%" + searchTxt1 + "%'  OR SurahNameU LIKE '%" + searchTxt1 + "%' ", null);
+                    a = c;
+                    if (c.moveToFirst()) {
+                        do {
+                            if (c.getString(0) != null) {
                                 FirstSearch.add(c.getString(2));
                                 SecondSearch.add(c.getString(4));
-                                c.moveToNext();
-                        }
-                    } while (c.moveToNext());
+                            }
+                        } while (c.moveToNext());
+                    }
+
+                }
+            }
+            else if(Ayah==true)
+            {
+                if (checkDB != null) {
+                    Cursor c = checkDB.rawQuery("select * from tayah where FatehMuhammadJalandhrield LIKE '%" + searchTxt1 + "%'", null);
+                    a = c;
+                    if (c.moveToFirst()) {
+                        do {
+                            if (c.getString(0) != null) {
+                                FirstSearch.add(c.getString(3));
+                                SecondSearch.add(c.getString(4));
+                            }
+                        } while (c.moveToNext());
+                    }
+
                 }
             }
 
@@ -164,6 +181,7 @@ public class DBMain extends SQLiteOpenHelper {
         if(checkDB != null) {
             checkDB.close();
         }
+        return a;
     }
 
     public ArrayList<String> getFirst()
@@ -192,6 +210,10 @@ public class DBMain extends SQLiteOpenHelper {
         return AyahsUrdu;
     }
 
+    String getItemNameEng(int i)
+    {
+        return FirstSearch.get(i);
+    }
 
     public void copyDB() throws IOException{
         try {

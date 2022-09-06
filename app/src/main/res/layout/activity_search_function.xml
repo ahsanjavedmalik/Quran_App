@@ -29,6 +29,7 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/toggleSurahName"
         app:layout_constraintEnd_toStartOf="@+id/toggleSurahName"
         app:layout_constraintStart_toStartOf="parent"
+        tools:checked="false"
         tools:ignore="HardcodedText,UseSwitchCompatOrMaterialXml" />
 
     <Button

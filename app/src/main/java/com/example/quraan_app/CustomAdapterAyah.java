@@ -45,8 +45,8 @@ public class CustomAdapterAyah extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflater.inflate(R.layout.activity_custom_list_view_ayah,null);
-        TextView AyahArabic1 = view.findViewById(R.id.AyahEng);
-        TextView AyahUrdu1 = view.findViewById(R.id.AyahUrdu);
+        TextView AyahArabic1 = view.findViewById(R.id.ArabicText);
+        TextView AyahUrdu1 = view.findViewById(R.id.UrduText);
         Log.i("get returns: ",AyahArabic.get(i));
         AyahArabic1.setText(AyahArabic.get(i));
         AyahUrdu1.setText(AyahUrdu.get(i));
