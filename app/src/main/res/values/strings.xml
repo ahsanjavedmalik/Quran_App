@@ -2,4 +2,6 @@
     <string name="app_name">quraan_app</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Welcome to import database</string>
+    <string name="open">Openning</string>
+    <string name="close">Closing</string>
 </resources>

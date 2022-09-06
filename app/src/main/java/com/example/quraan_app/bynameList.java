@@ -6,27 +6,90 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.io.IOException;
 
 public class bynameList extends AppCompatActivity{
 
-    String DB_PATH;
-    final Context context=this;
-    private SQLiteDatabase mDataBase;
-    private static String DB_NAME ="QuranDB.db";
+    DrawerLayout drawerLayout;
+
+    @Override
+    public void onBackPressed(){
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+            Toast.makeText(getApplicationContext(),"Start",Toast.LENGTH_LONG).show();
+
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),"End",Toast.LENGTH_LONG).show();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.byname_list);
+
+        NavigationView navigationView;
+        DrawerLayout drawerLayout;
+        Toolbar toolbar;
+        ActionBarDrawerToggle toggle;
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        navigationView=findViewById(R.id.nav_view);
+        drawerLayout=findViewById(R.id.drawer);
+
+        toggle=new ActionBarDrawerToggle(bynameList.this,drawerLayout,toolbar,R.string.open,R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
+            {
+                switch (menuItem.getItemId())
+                {
+                    case R.id.read_quran :
+                        Intent intent1 = new Intent(bynameList.this, bynameList.class);
+                        startActivity(intent1);
+                        //drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.home :
+                        Intent intent2 = new Intent(bynameList.this, MainActivity.class);
+                        startActivity(intent2);
+                        break;
+
+                    case R.id.search:
+                        Intent intent3 = new Intent(bynameList.this, SearchFunction.class);
+                        startActivity(intent3);
+                        break;
+
+                }
+
+                return true;
+            }
+        });
 
         TextView txt = (TextView) findViewById(R.id.txt);
         ListView listView = (ListView) findViewById(R.id.listViewAyah);
