@@ -4,13 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import java.io.IOException;
 
 public class SearchFunction extends AppCompatActivity {
 
@@ -20,6 +25,7 @@ public class SearchFunction extends AppCompatActivity {
         setContentView(R.layout.activity_search_function);
         EditText SearchText = findViewById(R.id.editTextSearch);
         Button Search = findViewById(R.id.searchBtn);
+        ListView SearchListView = findViewById(R.id.searchListView);
         Switch paraNameSearch = findViewById(R.id.toggleAyah);
         Switch suraNameSearch = findViewById(R.id.toggleSurahName);
         //set the current state of a Switch
@@ -34,6 +40,24 @@ public class SearchFunction extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String searchTxt = SearchText.getText().toString();
+                DBMain db;
+                db = new DBMain(getApplicationContext());
+
+                try {
+
+                    db.createDB();
+                } catch (IOException ioe) {
+
+                    throw new Error("Database not created....");
+                }
+
+                try {
+                    db.openDB();
+
+                } catch (SQLException sqle) {
+
+                    throw sqle;
+                }
 
                 SQLiteDatabase simpleDB = getApplicationContext().openOrCreateDatabase("QuranDb.db", Context.MODE_PRIVATE, null);
                 Cursor c = simpleDB.rawQuery("select * from tsurah where SurahNameE='"+searchTxt+"'", null);
@@ -46,7 +70,10 @@ public class SearchFunction extends AppCompatActivity {
                 while(c.moveToNext()){
                     buffer.append("SurahNameE "+c.getString(2)+"\n");
                 }
+                int index = Integer.parseInt(c.getString(0));
                 Toast.makeText(getApplicationContext(),"Result = "+buffer,Toast.LENGTH_SHORT).show();
+                ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,db.getSearchResult(index));
+                SearchListView.setAdapter(arrayAdapter);
             }
         });
     }

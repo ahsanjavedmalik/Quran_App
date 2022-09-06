@@ -6,19 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".SearchFunction">
 
-    <EditText
-        android:id="@+id/editTextSearch"
-        android:layout_width="match_parent"
+    <Switch
+        android:id="@+id/toggleSurahName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="24dp"
-        android:ems="10"
-        android:hint="Type here to Search"
-        android:inputType="textPersonName"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="Surah Name Search"
+        app:layout_constraintBottom_toTopOf="@+id/editTextSearch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/toggleAyah"
+        tools:ignore="HardcodedText,UseSwitchCompatOrMaterialXml" />
 
     <Switch
         android:id="@+id/toggleAyah"
@@ -32,27 +31,45 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText,UseSwitchCompatOrMaterialXml" />
 
-    <Switch
-        android:id="@+id/toggleSurahName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="31dp"
-        android:text="Surah Name Search"
-        app:layout_constraintBottom_toTopOf="@+id/editTextSearch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/toggleAyah"
-        tools:ignore="HardcodedText,UseSwitchCompatOrMaterialXml" />
-
     <Button
         android:id="@+id/searchBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:text="Search"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSearch" />
+
+    <EditText
+        android:id="@+id/editTextSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="65dp"
+        android:ems="10"
+        android:hint="Type here to Search"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/searchListView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBtn"
+        tools:listitem="@layout/activity_custom_list_view_ayah" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

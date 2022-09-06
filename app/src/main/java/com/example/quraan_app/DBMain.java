@@ -25,6 +25,7 @@ public class DBMain extends SQLiteOpenHelper {
     public ArrayList<String> surahNameUrdu = new ArrayList<>();
     public ArrayList<String> AyahsArabic = new ArrayList<>();
     public ArrayList<String> AyahsUrdu = new ArrayList<>();
+    public ArrayList<String> SearchResult = new ArrayList<>();
 
     public DBMain(Context context) {
         super(context,  DB_NAME , null, 3);
@@ -129,6 +130,12 @@ public class DBMain extends SQLiteOpenHelper {
             checkDB.close();
         }
 
+    }
+
+    public ArrayList<String> getSearchResult(int index1)
+    {
+        SearchResult.add(AyahsArabic.get(index1-1));
+        return SearchResult;
     }
 
     public ArrayList<String> getSurahNameEng()
