@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,7 +26,8 @@ public class DBMain extends SQLiteOpenHelper {
     public ArrayList<String> surahNameUrdu = new ArrayList<>();
     public ArrayList<String> AyahsArabic = new ArrayList<>();
     public ArrayList<String> AyahsUrdu = new ArrayList<>();
-    public ArrayList<String> SearchResult = new ArrayList<>();
+    public ArrayList<String> FirstSearch = new ArrayList<>();
+    public ArrayList<String> SecondSearch = new ArrayList<>();
 
     public DBMain(Context context) {
         super(context,  DB_NAME , null, 3);
@@ -132,10 +134,45 @@ public class DBMain extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<String> getSearchResult(int index1)
+    public void DBSearch(String searchTxt1)
     {
-        SearchResult.add(AyahsArabic.get(index1-1));
-        return SearchResult;
+        SQLiteDatabase checkDB = null;
+        try{
+
+            String path = DB_PATH + DB_NAME;
+            Log.i("myPath ......",path);
+            checkDB = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
+
+            Log.i("myPath ......",path);
+            if (checkDB!=null)
+            {
+                Cursor c = checkDB.rawQuery("select * from tsurah where SurahNameE LIKE '%"+searchTxt1+"%'  OR SurahNameU LIKE '%"+searchTxt1+"%' ",null);
+                if (c.moveToFirst()) {
+                    do {
+                        if(c.getString(0)!=null) {
+                                FirstSearch.add(c.getString(2));
+                                SecondSearch.add(c.getString(4));
+                                c.moveToNext();
+                        }
+                    } while (c.moveToNext());
+                }
+            }
+
+        }catch(SQLiteException e){
+            e.printStackTrace();
+        }
+        if(checkDB != null) {
+            checkDB.close();
+        }
+    }
+
+    public ArrayList<String> getFirst()
+    {
+        return FirstSearch;
+    }
+    public ArrayList<String> getSecond()
+    {
+        return SecondSearch;
     }
 
     public ArrayList<String> getSurahNameEng()

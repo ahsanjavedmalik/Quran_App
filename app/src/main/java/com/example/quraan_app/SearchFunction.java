@@ -7,7 +7,9 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,22 +60,20 @@ public class SearchFunction extends AppCompatActivity {
 
                     throw sqle;
                 }
+                db.DBSurahNames();
 
-                SQLiteDatabase simpleDB = getApplicationContext().openOrCreateDatabase("QuranDb.db", Context.MODE_PRIVATE, null);
-                Cursor c = simpleDB.rawQuery("select * from tsurah where SurahNameE='"+searchTxt+"'", null);
-                if(c.getCount()==0)
-                {
-                    Toast.makeText(getApplicationContext(),"No Record Found",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                StringBuffer buffer = new StringBuffer();
-                while(c.moveToNext()){
-                    buffer.append("SurahNameE "+c.getString(2)+"\n");
-                }
-                int index = Integer.parseInt(c.getString(0));
-                Toast.makeText(getApplicationContext(),"Result = "+buffer,Toast.LENGTH_SHORT).show();
-                ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,db.getSearchResult(index));
-                SearchListView.setAdapter(arrayAdapter);
+                db.DBSearch(searchTxt);
+
+                CustomAdapterSearch customBaseAdapter = new CustomAdapterSearch(getApplicationContext(),db.getFirst(),db.getSecond());
+                SearchListView.setAdapter(customBaseAdapter);
+
+                SearchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                        Toast.makeText(getApplicationContext(), "i:" +i + "l:" +l, Toast.LENGTH_SHORT).show();
+
+                    }
+                });
             }
         });
     }
