@@ -32,7 +32,7 @@ public class DBMain extends SQLiteOpenHelper {
 
     public DBMain(Context context) {
         super(context,  DB_NAME , null, 3);
-        this. context  = context;
+        this.context  = context;
     }
 
 

@@ -4,21 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class ayahActivity extends AppCompatActivity {
 
@@ -27,7 +24,7 @@ public class ayahActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ayah);
-        ListView listViewAyah = findViewById(R.id.listViewAyah);
+        ListView listViewAyah = findViewById(R.id.listViewSurah);
         Intent intent = getIntent();
         int index=Integer.parseInt(intent.getStringExtra("surahIndex"));
         Toast.makeText(this, "Index: " + index, Toast.LENGTH_SHORT).show();

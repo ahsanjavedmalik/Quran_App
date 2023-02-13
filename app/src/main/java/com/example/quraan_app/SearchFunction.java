@@ -30,21 +30,6 @@ import java.io.IOException;
 
 public class SearchFunction extends customListViewAyah {
 
-    DrawerLayout drawerLayout;
-
-    @Override
-    public void onBackPressed(){
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
-            drawerLayout.closeDrawer(GravityCompat.START);
-            Toast.makeText(getApplicationContext(),"Start",Toast.LENGTH_LONG).show();
-
-        }
-        else
-        {
-            Toast.makeText(getApplicationContext(),"End",Toast.LENGTH_LONG).show();
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,4 +165,17 @@ public class SearchFunction extends customListViewAyah {
         intent.putExtra("surahIndex",String.valueOf(ii));
         startActivity(intent);
     }
+
+    DrawerLayout drawerLayout;
+    int counter =0;
+    @Override
+    public void onBackPressed(){
+        counter++;
+        if(counter == 2)
+        {
+            super.onBackPressed();
+        }
+
+    }
+
 }

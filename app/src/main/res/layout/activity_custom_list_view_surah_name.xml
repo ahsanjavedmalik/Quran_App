@@ -13,7 +13,6 @@
         android:text="surahNameEng"
         android:textSize="27dp"
         android:textColor="@color/purple_700"
-        android:fontFamily="@font/jameelnoorinastaleeqregular"
         android:gravity="center"
         tools:ignore="HardcodedText" />
 
@@ -23,7 +22,6 @@
         android:layout_height="wrap_content"
         android:text="surahNameUrdu"
         android:textColor="@color/green"
-        android:fontFamily="@font/jameelnoorinastaleeqregular"
         android:textSize="30dp"
         android:gravity="center"
         tools:ignore="HardcodedText" />

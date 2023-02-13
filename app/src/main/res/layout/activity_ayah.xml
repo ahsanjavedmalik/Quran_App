@@ -22,7 +22,7 @@
 
 
         <ListView
-            android:id="@+id/listViewAyah"
+            android:id="@+id/listViewSurah"
             android:layout_width="381dp"
             android:layout_height="654dp"
             android:layout_below="@+id/toolbar"

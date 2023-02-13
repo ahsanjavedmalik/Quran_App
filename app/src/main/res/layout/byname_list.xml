@@ -22,7 +22,7 @@
 
 
         <ListView
-            android:id="@+id/listViewAyah"
+            android:id="@+id/listViewSurah"
             android:layout_width="380dp"
             android:layout_height="649dp"
             android:layout_below="@+id/toolbar"
@@ -38,7 +38,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt"
             tools:listitem="@layout/activity_custom_list_view_surah_name" />
 
     </RelativeLayout>

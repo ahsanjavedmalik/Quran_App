@@ -14,7 +14,6 @@
         android:gravity="right"
         android:text="ArabicText"
         android:textSize="30dp"
-        android:fontFamily="@font/noorehuda"
         android:textStyle="bold"
         tools:ignore="HardcodedText" />
 
@@ -24,7 +23,6 @@
         android:layout_height="wrap_content"
         android:text="UrduText"
         android:textSize="24dp"
-        android:fontFamily="@font/jameelnoorinastaleeqregular"
         android:gravity="right"
         tools:ignore="HardcodedText" />
 

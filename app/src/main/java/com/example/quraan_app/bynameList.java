@@ -1,24 +1,19 @@
 package com.example.quraan_app;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
@@ -76,7 +71,7 @@ public class bynameList extends AppCompatActivity{
         });
 
         TextView txt = (TextView) findViewById(R.id.txt);
-        ListView listView = (ListView) findViewById(R.id.listViewAyah);
+        ListView listView = (ListView) findViewById(R.id.listViewSurah);
 
         DBMain db;
         db = new DBMain(getApplicationContext());
@@ -109,9 +104,18 @@ public class bynameList extends AppCompatActivity{
     }
     private void toAyahList(int ii)
     {
-        Intent intent = new Intent(this, ayahActivity.class);
-        intent.putExtra("surahIndex",String.valueOf(ii));
-        startActivity(intent);
+//        Intent intent = new Intent(this, ayahActivity.class);
+//        intent.putExtra("surahIndex",String.valueOf(ii));
+//        startActivity(intent);
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("*/*");
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_SUBJECT,"OOP SS");
+        intent.putExtra(Intent.EXTRA_EMAIL,"bsef19m049@pucit.edu.pk");
+        if (intent.resolveActivity(getPackageManager()) != null)
+        {
+            startActivity(intent);
+        }
 
     }
 

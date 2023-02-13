@@ -14,7 +14,6 @@
         android:gravity="right"
         android:text="first"
         android:textSize="30dp"
-        android:fontFamily="@font/noorehuda"
         android:textStyle="bold"
         tools:ignore="HardcodedText" />
 
@@ -22,7 +21,6 @@
         android:id="@+id/secondTextViewSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/jameelnoorinastaleeqregular"
         android:gravity="right"
         android:text="second"
         android:textSize="24dp"
